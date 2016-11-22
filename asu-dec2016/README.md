@@ -81,6 +81,7 @@ Creating a Security Group and Allow SSH to `demo-sg` Security Group
 aws ec2 create-security-group --group-name demo-sg --description "Demo security group"
 aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 22 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 80 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 8080 --cidr 0.0.0.0/0
 ```
 Launch EC2 instance
 ```
