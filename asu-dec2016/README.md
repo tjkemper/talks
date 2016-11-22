@@ -78,17 +78,27 @@ Check if the key pair was created
 ```
 aws ec2 describe-key-pairs
 ```
+Creating a Security Group and Allow SSH to `demo-sg` Security Group
+```
+aws ec2 create-security-group --group-name demo-sg --description "Demo security group"
+aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 22 --cidr 0.0.0.0/0
+```
 Launch EC2 instance
 ```
-aws ec2 run-instances --image-id ami-b73b63a0 --instance-type t2.micro --key-name demo-key-pair
+aws ec2 run-instances --image-id ami-b73b63a0 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
 ```
 Get Public DNS Name for our EC2 instance (takes a few minutes)
 ```
 aws ec2 describe-instances --query 'Reservations[].Instances[].PublicDnsName'
+aws ec2 describe-instances --query 'Reservations[].Instances[].PublicDnsName' --filters "Name=instance-type,Values=t2.micro"
 ```
 
 <br/>
 ### 4. Connect to EC2 instance
+SSH into the EC2 instance
+```
+ssh -i demo-key-pair.pem ec2-user@ec2-54-225-193-182.compute-1.amazonaws.com
+```
 
 
 <br/>
