@@ -97,7 +97,7 @@ The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`
 
 SSH into the EC2 instance
 ```
-ssh -i demo-key-pair.pem ec2-user@<publicDnsName>
+ssh -i demo-key-pair.pem ubuntu@<publicDnsName>
 ```
 Type in `yes` and press `Enter`  
 ![AWS SSH question](pictures/aws-ssh-question.png)
