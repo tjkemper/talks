@@ -119,12 +119,12 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 Enter default Jenkins password
 ![Jenkins password](pictures/jenkins-password.png)
-Download recommended plugins
+Install suggested plugins
 ![Jenkins plugins](pictures/jenkins-plugins.png)
 Enter admin info
 ![Jenkins admin](pictures/jenkins-admin.png)
 
-
 <br/>
-### 6. Configure Jenkins to achieve Continuous Integration (CI) and Continuous Deployment (CD)
+### 6. Create Jenkins job
+> Finally Jenkins is set up
 
