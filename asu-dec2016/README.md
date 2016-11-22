@@ -8,7 +8,9 @@
 * Demonstrate Jenkins basics
 
 ## Prerequisites
-* Good understanding of web applications
+* [Install Java](https://java.com/en/download/help/index_installing.xml)
+* [Install Maven](http://maven.apache.org/install.html)
+* [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * AWS account and AWS CLI
   1. [Getting Set Up with the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html)
   + [Installing the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
@@ -27,18 +29,49 @@
   
 ## Demo
 
-### 1. Create EC2 instance
+### 1. Make sure everything is installed.  Open command line and enter these commands:
+#### Java
+`java -version`
+#### Maven
+`mvn -version`
+#### Git
+`git version`
+#### AWS CLI
+`aws --version`
+
+<br/>
+### 2. Run Java Application locally
+Under the `app/` folder, there is a Java application.  Let's get it running.  
+<br/>
+###### Commands
+Go into app directory
+```
+cd app/
+```
+Build the Java application
+```
+mvn clean package
+```
+Run the Java application
+```
+java -jar target/app-0.1.0.jar
+```
+Using your browser, enter the following url: `http://localhost:8080`
+
+> Our goal is to deploy this application in the cloud.
+
+<br/>
+### 3. Create EC2 instance
 
 
-
-### 2. Connect to EC2 instance
-
-
-
-### 3. Install Jenkins on EC2 instance
+<br/>
+### 4. Connect to EC2 instance
 
 
+<br/>
+### 5. Install Jenkins on EC2 instance
 
-### 4. Configure Jenkins to achieve Continuous Integration (CI) and Continuous Deployment (CD)
 
+<br/>
+### 6. Configure Jenkins to achieve Continuous Integration (CI) and Continuous Deployment (CD)
 
