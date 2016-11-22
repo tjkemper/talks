@@ -40,11 +40,11 @@
 `aws --version`
 
 <br/>
-### 2. Run Java Application locally
+### 2. Run the Java Application locally
 Under the `app/` folder, there is a Java application.  Let's get it running.  
 <br/>
 ###### Commands
-Go into app directory
+Go into the `app/` directory
 ```
 cd app/
 ```
