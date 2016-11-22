@@ -98,15 +98,18 @@ SSH into the EC2 instance
 ```
 ssh -i demo-key-pair.pem ec2-user@<publicDnsName>
 ```
-Type in `yes` and press `Enter`
+Type in `yes` and press `Enter`  
 ![AWS SSH question](pictures/aws-ssh-question.png)
 
-Success!
+Success!  
 ![AWS SSH success](pictures/aws-ssh-success.png)
 
 <br/>
 ### 5. Install Jenkins on EC2 instance
 
+While logged into the EC2 instance, run the commands in `ec2-jenkins.sh`.
+
+Using your browser, enter the following url: `http://<publicDnsName>`
 
 <br/>
 ### 6. Configure Jenkins to achieve Continuous Integration (CI) and Continuous Deployment (CD)
