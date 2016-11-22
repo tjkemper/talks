@@ -30,41 +30,27 @@
 ## Demo
 
 ### 1. Make sure everything is installed.  Open command line and enter these commands:
-#### Java
 `java -version`
-#### Maven
 `mvn -version`
-#### Git
 `git version`
-#### AWS CLI
 `aws --version`
 
 <br/>
 ### 2. Run the Java Application locally
 > Under the `app/` folder, there is a Java application.  Let's get it running.  
 
-Go into the `app/` directory
 ```
-cd app/
-```
-Build the Java application
-```
+cd /<path>/app/
 mvn clean package
-```
-Run the Java application
-```
 java -jar target/app-0.1.0.jar
 ```
 Using your browser, enter the following url: `http://localhost:8080`
 
 <br/>
-> Our goal is to deploy this application in the cloud.
-
-<br/>
 ### 3. Launch EC2 instance
 > Let's launch our first EC2 instance.  
 
-[Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair)
+[Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair) - look here if using Windows
 ```
 aws ec2 create-key-pair --key-name demo-key-pair --query 'KeyMaterial' --output text > demo-key-pair.pem
 ```
@@ -72,11 +58,7 @@ Restrict permissions (optional but recommended)
 ```
 chmod 400 demo-key-pair.pem
 ```
-Check if the key pair was created
-```
-aws ec2 describe-key-pairs
-```
-Creating a Security Group and Allow SSH to `demo-sg` Security Group
+Creating a Security Group
 ```
 aws ec2 create-security-group --group-name demo-sg --description "Demo security group"
 aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 22 --cidr 0.0.0.0/0
@@ -101,10 +83,7 @@ SSH into the EC2 instance
 ssh -i demo-key-pair.pem ubuntu@<publicDnsName>
 ```
 Type in `yes` and press `Enter`  
-![AWS SSH question](pictures/aws-ssh-question.png)
-
-Success!  
-![AWS SSH success](pictures/aws-ssh-success.png)
+![AWS SSH question](pictures/aws-ssh.png)
 
 <br/>
 ### 5. Install Jenkins on EC2 instance
@@ -118,11 +97,11 @@ Find the default Jenkins password
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 Enter default Jenkins password
-![Jenkins password](pictures/jenkins-password.png)
+
 Install suggested plugins
-![Jenkins plugins](pictures/jenkins-plugins.png)
+
 Enter admin info
-![Jenkins admin](pictures/jenkins-admin.png)
+
 
 <br/>
 ### 6. Create Jenkins job
