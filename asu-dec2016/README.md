@@ -1,6 +1,6 @@
 # DevOps demo
 
-    Leverage AWS to create CI/CD Pipeline using Jenkins
+    Leverage AWS to create a CI/CD Pipeline using Jenkins
 
 ## Project Goals
 * Demonstrate the benefits of cloud, DevOps, CI/CD
