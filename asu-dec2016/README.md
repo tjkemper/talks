@@ -99,7 +99,9 @@ SSH into the EC2 instance
 ```
 ssh -i demo-key-pair.pem ec2-user@ec2-54-225-193-182.compute-1.amazonaws.com
 ```
+![AWS SSH question](pictures/aws-ssh-question.png)
 
+![AWS SSH success](pictures/aws-ssh-success.png)
 
 <br/>
 ### 5. Install Jenkins on EC2 instance
