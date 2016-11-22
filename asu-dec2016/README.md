@@ -23,7 +23,7 @@
 * During the talk, it is recommended to **take notes and ask questions**.  If you want to do the demo, do it before or after the talk when you can set your own pace.
 * I am using a Mac.  I will do my best to provide helpful links for Windows users.
 * Common ways to use AWS:
-  1. AWS CLI
+  1. [AWS CLI](https://aws.amazon.com/cli/)
   + [AWS Console](https://console.aws.amazon.com)
 * During this demo we will use the AWS CLI
   
@@ -62,8 +62,30 @@ Using your browser, enter the following url: `http://localhost:8080`
 > Our goal is to deploy this application in the cloud.
 
 <br/>
-### 3. Create EC2 instance
-
+### 3. Launch EC2 instance
+Let's launch our first EC2 instance.
+<br/>
+###### Commands
+[Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair)
+```
+aws ec2 create-key-pair --key-name demo-key-pair --query 'KeyMaterial' --output text > demo-key-pair.pem
+```
+Restrict permissions (optional but recommended)
+```
+chmod 400 demo-key-pair.pem
+```
+Check if the key pair was created
+```
+aws ec2 describe-key-pairs
+```
+Launch EC2 instance
+```
+aws ec2 run-instances --image-id ami-b73b63a0 --instance-type t2.micro --key-name demo-key-pair
+```
+Get Public DNS Name for our EC2 instance (takes a few minutes)
+```
+aws ec2 describe-instances --query 'Reservations[].Instances[].PublicDnsName'
+```
 
 <br/>
 ### 4. Connect to EC2 instance
