@@ -84,7 +84,7 @@ aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --p
 ```
 Launch EC2 instance
 ```
-aws ec2 run-instances --image-id ami-b73b63a0 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
+aws ec2 run-instances --image-id ami-40d28157 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
 ```
 Get Public DNS Name for our EC2 instance (takes a few minutes)
 ```
