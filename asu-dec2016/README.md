@@ -111,8 +111,20 @@ Success!
 
 While logged into the EC2 instance, run the commands in `ec2-jenkins.sh`.
 
-Using your browser, enter the following url: `http://<publicDnsName>`
+Using your browser, enter the following url: `http://<publicDnsName>:8080`
+
+Find the default Jenkins password
+```
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+Enter default Jenkins password
+![Jenkins password](pictures/jenkins-password.png)
+Install suggested plugins
+![Jenkins plugins](pictures/jenkins-plugins.png)
+Enter admin info
+![Jenkins admin](pictures/jenkins-admin.png)
 
 <br/>
-### 6. Configure Jenkins to achieve Continuous Integration (CI) and Continuous Deployment (CD)
+### 6. Create Jenkins job
+> Finally Jenkins is set up
 
