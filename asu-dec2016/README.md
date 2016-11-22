@@ -22,7 +22,7 @@
 * **This talk is focused on learning the broad strokes.**  This means the talk is fast-paced and it may be difficult to complete the demo during the talk.
 * During the talk, it is recommended to **take notes and ask questions**.  If you want to do the demo, do it before or after the talk when you can set your own pace.
 * I am using a Mac.  I will do my best to provide helpful links for Windows users.
-* You have 2 options to interact with AWS:
+* Common ways to use AWS:
   1. AWS CLI
   + [AWS Console](https://console.aws.amazon.com)
 * During this demo we will use the AWS CLI
@@ -58,6 +58,7 @@ java -jar target/app-0.1.0.jar
 ```
 Using your browser, enter the following url: `http://localhost:8080`
 
+<br/>
 > Our goal is to deploy this application in the cloud.
 
 <br/>
