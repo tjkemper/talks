@@ -41,9 +41,8 @@
 
 <br/>
 ### 2. Run the Java Application locally
-Under the `app/` folder, there is a Java application.  Let's get it running.  
-<br/>
-###### Commands
+> Under the `app/` folder, there is a Java application.  Let's get it running.  
+
 Go into the `app/` directory
 ```
 cd app/
@@ -63,9 +62,8 @@ Using your browser, enter the following url: `http://localhost:8080`
 
 <br/>
 ### 3. Launch EC2 instance
-Let's launch our first EC2 instance.
-<br/>
-###### Commands
+> Let's launch our first EC2 instance.  
+
 [Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair)
 ```
 aws ec2 create-key-pair --key-name demo-key-pair --query 'KeyMaterial' --output text > demo-key-pair.pem
@@ -89,18 +87,21 @@ aws ec2 run-instances --image-id ami-b73b63a0 --instance-type t2.micro --key-nam
 ```
 Get Public DNS Name for our EC2 instance (takes a few minutes)
 ```
-aws ec2 describe-instances --query 'Reservations[].Instances[].PublicDnsName'
 aws ec2 describe-instances --query 'Reservations[].Instances[].PublicDnsName' --filters "Name=instance-type,Values=t2.micro"
 ```
+The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`
 
 <br/>
 ### 4. Connect to EC2 instance
+
 SSH into the EC2 instance
 ```
-ssh -i demo-key-pair.pem ec2-user@ec2-54-225-193-182.compute-1.amazonaws.com
+ssh -i demo-key-pair.pem ec2-user@<publicDnsName>
 ```
+Type in `yes` and press `Enter`
 ![AWS SSH question](pictures/aws-ssh-question.png)
 
+Success!
 ![AWS SSH success](pictures/aws-ssh-success.png)
 
 <br/>
