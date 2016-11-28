@@ -30,10 +30,10 @@
 ## Demo
 
 ### 1. Make sure everything is installed.  Open command line and enter these commands:
-`java -version`
-`mvn -version`
-`git version`
-`aws --version`
+`java -version`  
+`mvn -version`  
+`git version`  
+`aws --version`  
 
 <br/>
 ### 2. Run the Java Application locally
@@ -50,7 +50,7 @@ Using your browser, enter the following url: `http://localhost:8080`
 ### 3. Launch EC2 instance
 > Let's launch our first EC2 instance.  
 
-[Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair) - look here if using Windows
+[Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair) - click link if using Windows
 ```
 aws ec2 create-key-pair --key-name demo-key-pair --query 'KeyMaterial' --output text > demo-key-pair.pem
 ```
@@ -73,7 +73,7 @@ Get Public DNS Name for our EC2 instance (takes a few minutes)
 ```
 aws ec2 describe-instances --query 'Reservations[].Instances[].PublicDnsName' --filters "Name=instance-type,Values=t2.micro"
 ```
-The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`
+The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<publicDnsName>`.
 
 <br/>
 ### 4. Connect to EC2 instance
@@ -105,5 +105,5 @@ Enter admin info
 
 <br/>
 ### 6. Create Jenkins job
-> Finally Jenkins is set up
+> Finally Jenkins is set up.  Let's create a Jenkins job to build and deploy our app.
 
