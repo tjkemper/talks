@@ -47,7 +47,7 @@ java -jar target/app-0.1.0.jar
 Using your browser, enter the following url: `http://localhost:8080`
 
 <br/>
-### 3. Launch EC2 instance
+### 3. Launch EC2 instance for Jenkins
 > Let's launch our first EC2 instance.  
 
 [Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair) - click link if using Windows
@@ -65,22 +65,32 @@ aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --p
 aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 80 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 8080 --cidr 0.0.0.0/0
 ```
-Launch EC2 instance
+Launch Jenkins EC2 instance
 ```
 aws ec2 run-instances --image-id ami-40d28157 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
 ```
-Get Public DNS Name for our EC2 instance (takes a few minutes)
+Get Jenkins instanceId.  
+The instanceId will look like: `i-051ac82e682fe22de`.  We will call this: `<jenkinsId>`.  
 ```
-aws ec2 describe-instances --query 'Reservations[].Instances[].PublicDnsName' --filters "Name=instance-type,Values=t2.micro"
+aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
 ```
-The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<publicDnsName>`.
+Tag Jenkins EC2 instance (use `<jenkinsId>`)
+```
+aws ec2 create-tags --resources <jenkinsId> --tags "Key=Name,Value=jenkins"
+```
+
+Get Public DNS Name for our Jenkins EC2 instance (may take a few minutes).  
+The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<jenkinsDnsName>`.
+```
+aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
+```
 
 <br/>
-### 4. Connect to EC2 instance
+### 4. Connect to Jenkins EC2 instance
 
-SSH into the EC2 instance
+SSH into the Jenkins EC2 instance (use `<jenkinsDnsName>`)
 ```
-ssh -i demo-key-pair.pem ubuntu@<publicDnsName>
+ssh -i demo-key-pair.pem ubuntu@<jenkinsDnsName>
 ```
 Type in `yes` and press `Enter`  
 ![AWS SSH question](pictures/aws-ssh.png)
@@ -90,7 +100,7 @@ Type in `yes` and press `Enter`
 
 While logged into the EC2 instance, run the commands in `ec2-jenkins.sh`.
 
-Using your browser, enter the following url: `http://<publicDnsName>:8080`
+Using your browser, enter the following url: `http://<jenkinsDnsName>:8080`
 
 Find the default Jenkins password
 ```
@@ -102,6 +112,8 @@ Install suggested plugins
 
 Enter admin info
 
+<br/>
+### 3. Launch EC2 instance for Java Application
 
 <br/>
 ### 6. Create Jenkins job
