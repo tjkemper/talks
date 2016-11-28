@@ -73,20 +73,15 @@ Launch Jenkins EC2 instance
 ```
 aws ec2 run-instances --image-id ami-40d28157 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
 ```
-Get Jenkins instanceId.  
+Get Jenkins **InstanceId** and **Public DNS Name**.  
+The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<jenkinsDnsName>`.
 The instanceId will look like: `i-051ac82e682fe22de`.  We will call this: `<jenkinsId>`.  
 ```
-aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
+aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, InstanceId, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
 ```
 Tag Jenkins EC2 instance
 ```
 aws ec2 create-tags --resources <jenkinsId> --tags "Key=Name,Value=jenkins"
-```
-
-Get Public DNS Name for our Jenkins EC2 instance (may take a few minutes).  
-The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<jenkinsDnsName>`.
-```
-aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
 ```
 
 <br/>
@@ -100,7 +95,7 @@ Type in `yes` and press `Enter`
 ![AWS SSH question](pictures/aws-ssh.png)
 
 <br/>
-### 6. Install Jenkins on EC2 instance
+### 6. Configure Jenkins EC2 instance
 
 While logged into the EC2 instance, run the commands in `ec2-jenkins.sh`.
 
@@ -123,23 +118,31 @@ Launch Java App EC2 instance
 ```
 aws ec2 run-instances --image-id ami-40d28157 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
 ```
-Get Java App instanceId.  
+Get Java App **InstanceId** and **Public DNS Name**.  
+The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<appDnsName>`.
 The instanceId will look like: `i-051ac82e682fe22de`.  We will call this: `<appId>`.  
 ```
-aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
+aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, InstanceId, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
 ```
-Tag Java App EC2 instance (use `<appId>`)
+Tag Java App EC2 instance
 ```
 aws ec2 create-tags --resources <appId> --tags "Key=Name,Value=app"
 ```
 
-Get Public DNS Name for our Java App EC2 instance (may take a few minutes).  
-The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<appDnsName>`.
+<br/>
+### 8. Connect to Java App EC2 instance
+
+SSH into the Java App EC2 instance
 ```
-aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
+ssh -i demo-key-pair.pem ubuntu@<appDnsName>
 ```
 
 <br/>
-### 8. Create Jenkins job
-> Finally Jenkins is set up.  Let's create a Jenkins job to build and deploy our app.
+### 9. Configure Java App EC2 instance
+
+While logged into the EC2 instance, run the commands in `ec2-app.sh`.
+
+<br/>
+### 10. Create Jenkins job
+> Now that we have our build and app servers configured, let's create a Jenkins job to build and deploy our app.
 
