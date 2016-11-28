@@ -30,10 +30,10 @@
 ## Demo
 
 ### 1. Make sure everything is installed.  Open command line and enter these commands:
-`java -version`
-`mvn -version`
-`git version`
-`aws --version`
+`java -version`  
+`mvn -version`  
+`git version`  
+`aws --version`  
 
 <br/>
 ### 2. Run the Java Application locally
@@ -47,10 +47,10 @@ java -jar target/app-0.1.0.jar
 Using your browser, enter the following url: `http://localhost:8080`
 
 <br/>
-### 3. Launch EC2 instance
-> Let's launch our first EC2 instance.  
 
-[Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair) - look here if using Windows
+### 3. Set up AWS key pair and security group  
+
+[Creating a key pair](http://docs.aws.amazon.com/cli/latest/userguide/cli-ec2-keypairs.html#creating-a-key-pair) - click link if using Windows
 ```
 aws ec2 create-key-pair --key-name demo-key-pair --query 'KeyMaterial' --output text > demo-key-pair.pem
 ```
@@ -65,32 +65,41 @@ aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --p
 aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 80 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --port 8080 --cidr 0.0.0.0/0
 ```
-Launch EC2 instance
+
+<br/>
+### 4. Launch EC2 instance for Jenkins
+
+Launch Jenkins EC2 instance
 ```
 aws ec2 run-instances --image-id ami-40d28157 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
 ```
-Get Public DNS Name for our EC2 instance (takes a few minutes)
+Get Jenkins **InstanceId** and **Public DNS Name**.  
+The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<jenkinsDnsName>`.
+The instanceId will look like: `i-051ac82e682fe22de`.  We will call this: `<jenkinsId>`.  
 ```
-aws ec2 describe-instances --query 'Reservations[].Instances[].PublicDnsName' --filters "Name=instance-type,Values=t2.micro"
+aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, InstanceId, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
 ```
-The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`
+Tag Jenkins EC2 instance
+```
+aws ec2 create-tags --resources <jenkinsId> --tags "Key=Name,Value=jenkins"
+```
 
 <br/>
-### 4. Connect to EC2 instance
+### 5. Connect to Jenkins EC2 instance
 
-SSH into the EC2 instance
+SSH into the Jenkins EC2 instance
 ```
-ssh -i demo-key-pair.pem ubuntu@<publicDnsName>
+ssh -i demo-key-pair.pem ubuntu@<jenkinsDnsName>
 ```
 Type in `yes` and press `Enter`  
 ![AWS SSH question](pictures/aws-ssh.png)
 
 <br/>
-### 5. Install Jenkins on EC2 instance
+### 6. Configure Jenkins EC2 instance
 
 While logged into the EC2 instance, run the commands in `ec2-jenkins.sh`.
 
-Using your browser, enter the following url: `http://<publicDnsName>:8080`
+Using your browser, enter the following url: `http://<jenkinsDnsName>:8080`
 
 Find the default Jenkins password
 ```
@@ -102,8 +111,38 @@ Install suggested plugins
 
 Enter admin info
 
+<br/>
+### 7. Launch EC2 instance for our Java App
+
+Launch Java App EC2 instance
+```
+aws ec2 run-instances --image-id ami-40d28157 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
+```
+Get Java App **InstanceId** and **Public DNS Name**.  
+The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<appDnsName>`.
+The instanceId will look like: `i-051ac82e682fe22de`.  We will call this: `<appId>`.  
+```
+aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, InstanceId, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
+```
+Tag Java App EC2 instance
+```
+aws ec2 create-tags --resources <appId> --tags "Key=Name,Value=app"
+```
 
 <br/>
-### 6. Create Jenkins job
-> Finally Jenkins is set up
+### 8. Connect to Java App EC2 instance
+
+SSH into the Java App EC2 instance
+```
+ssh -i demo-key-pair.pem ubuntu@<appDnsName>
+```
+
+<br/>
+### 9. Configure Java App EC2 instance
+
+While logged into the EC2 instance, run the commands in `ec2-app.sh`.
+
+<br/>
+### 10. Create Jenkins job
+> Now that we have our build and app servers configured, let's create a Jenkins job to build and deploy our app.
 
