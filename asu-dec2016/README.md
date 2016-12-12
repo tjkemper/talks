@@ -113,7 +113,7 @@ Enter admin info
 * Click **New Item** and select **Freestyle Project**
 * Under **Source Control Management** select **Git** and set the **Repository Url** to `https://github.com/tjkemper/talks.git`
 * Check `Delete workspace before build starts`
-* Select **Add a build step** then **Execute Shell**
+* Select **Add build step** then **Execute Shell**
 * Copy/Paste
 ```
 sudo lsof -t -i:9090 && sudo kill $(sudo lsof -t -i:9090) || echo "no process running on port 9090"
