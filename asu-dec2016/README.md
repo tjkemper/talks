@@ -108,5 +108,17 @@ Enter admin info
 
 <br/>
 ### 10. Create Jenkins job
-> Now that we have our servers configure, let's create a Jenkins job to build and deploy our app.
+> Now that we have our server configured, let's create a Jenkins job to build and deploy our app.
 
+* Click **New Item** and select **Freestyle Project**
+* Under **Source Control Management** select **Git** and set the **Repository Url** to `https://github.com/tjkemper/talks.git`
+* Check `Delete workspace before build starts`
+* Select **Add a build step** then **Execute Shell**
+* Copy/Paste
+```
+sudo lsof -t -i:9090 && sudo kill $(sudo lsof -t -i:9090) || echo "no process running on port 9090"
+cd ./asu-dec2016/app/
+mvn clean package
+echo "java -jar target/app.jar" | at now
+```
+* Run the job
