@@ -73,15 +73,10 @@ Launch EC2 instance
 ```
 aws ec2 run-instances --image-id ami-40d28157 --instance-type t2.micro --key-name demo-key-pair --security-groups demo-sg
 ```
-Get **InstanceId** and **Public DNS Name**.  
-The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<dnsName>`.
-The instanceId will look like: `i-051ac82e682fe22de`.  We will call this: `<instanceId>`.  
+Get **Public DNS Name**.  
+The Public DNS Name will look like: `ec2-54-225-193-182.compute-1.amazonaws.com`.  We will call this `<dnsName>`. 
 ```
 aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, InstanceId, Tags[*]]' --filters "Name=instance-type,Values=t2.micro"
-```
-Tag EC2 instance
-```
-aws ec2 create-tags --resources <instanceId> --tags "Key=Name,Value=demo"
 ```
 
 <br/>
