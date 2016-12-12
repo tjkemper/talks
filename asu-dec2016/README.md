@@ -1,11 +1,13 @@
-# DevOps demo
+# Cloud and CI Demo
 
     Leverage AWS to create a CI/CD Pipeline using Jenkins
 
 ## Project Goals
-* Demonstrate the benefits of cloud, DevOps, CI/CD
+* Demonstrate the benefits of Cloud and CI
 * Demonstrate AWS basics
 * Demonstrate Jenkins basics
+
+## Warning: AWS costs money
 
 ## Prerequisites
 * [Install Java](https://java.com/en/download/help/index_installing.xml)
@@ -19,8 +21,6 @@
   * Demo will assume you can: [Connect to Your Linux Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)
 
 ## Notes
-* **This talk is focused on learning the broad strokes.**  This means the talk is fast-paced and it may be difficult to complete the demo during the talk.
-* During the talk, it is recommended to **take notes and ask questions**.  If you want to do the demo, do it before or after the talk when you can set your own pace.
 * I am using a Mac.  I will do my best to provide helpful links for Windows users.
 * Common ways to use AWS:
   1. [AWS CLI](https://aws.amazon.com/cli/)
