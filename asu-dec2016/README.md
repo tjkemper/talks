@@ -42,9 +42,9 @@
 ```
 cd /<path>/app/
 mvn clean package
-java -jar target/app-0.1.0.jar
+java -jar target/app.jar
 ```
-Using your browser, enter the following url: `http://localhost:8080`
+Using your browser, enter the following url: `http://localhost:9090`
 
 <br/>
 
