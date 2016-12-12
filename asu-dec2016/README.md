@@ -92,7 +92,7 @@ Type in `yes` and press `Enter`
 <br/>
 ### 6. Configure EC2 instance
 
-While logged into the EC2 instance, run the commands in `ec2-setup.sh`.
+While logged into the EC2 instance, run the commands in `ec2-setup.sh`
 
 Using your browser, enter the following url: `http://<dnsName>:8080`
 
@@ -107,7 +107,7 @@ Install suggested plugins
 Enter admin info
 
 <br/>
-### 10. Create Jenkins job
+### 7. Create Jenkins job
 > Now that we have our server configured, let's create a Jenkins job to build and deploy our app.
 
 * Click **New Item** and select **Freestyle Project**
