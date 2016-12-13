@@ -122,3 +122,4 @@ mvn clean package
 echo "java -jar target/app.jar" | at now
 ```
 * Run the job
+* Using your browser, enter the following url: `http://<dnsName>:9090`
