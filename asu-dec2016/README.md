@@ -36,6 +36,7 @@
 `aws --version`  
 
 <br/>
+
 ### 2. Run the Java Application locally
 > Under the `app/` folder, there is a Java application.  Let's get it running.  
 
@@ -67,6 +68,7 @@ aws ec2 authorize-security-group-ingress --group-name demo-sg --protocol tcp --p
 ```
 
 <br/>
+
 ### 4. Launch EC2 instance
 
 Launch EC2 instance
@@ -80,6 +82,7 @@ aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicDnsName, I
 ```
 
 <br/>
+
 ### 5. Connect to EC2 instance
 
 SSH into the EC2 instance
@@ -90,6 +93,7 @@ Type in `yes` and press `Enter`
 ![AWS SSH question](pictures/aws-ssh.png)
 
 <br/>
+
 ### 6. Configure EC2 instance
 
 While logged into the EC2 instance, run the commands in `ec2-setup.sh`
@@ -107,6 +111,7 @@ Install suggested plugins
 Enter admin info
 
 <br/>
+
 ### 7. Create Jenkins job
 > Now that we have our server configured, let's create a Jenkins job to build and deploy our app.
 
